@@ -1,0 +1,55 @@
+.counter{
+    margin: 20px;
+    padding: 5px;
+border: solid #84e2fe 2px;
+    height: 240px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 5px;
+    background-color: #292c35;
+
+}
+.desk{
+    border: solid #84E2FEFF 2px;
+    text-align: center;
+    height: 100px;
+    width: 260px;
+    margin: 5px;
+    padding: 30px 5px;
+    font-size:60px ;
+    font-weight: bolder;
+    border-radius: 5px;
+    color: #84E2FEFF;
+}
+.buttons{
+    border: solid #84E2FEFF 2px;
+    display: flex;
+    justify-content: space-evenly;
+    height: 50px;
+    width: 260px;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 7px;
+    align-items: center;
+
+}
+
+.deskMaxNum{
+    color: #ee1442;
+}
+.button{
+    border-radius: 7px;
+    max-width: 60px;
+    height: 30px;
+    color: #292c35;
+    font-size:20px;
+    font-weight: bolder;
+    border: none;
+    background-color: #84e2fe;
+}
+.button:disabled{
+    background-color: #3f7080;
+}
