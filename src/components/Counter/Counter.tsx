@@ -41,7 +41,7 @@ export const Counter = () => {
     //
     //     }
     // }
-
+//
     return (
         <div className={s.wrapper}>
             <div className={s.settings}>
