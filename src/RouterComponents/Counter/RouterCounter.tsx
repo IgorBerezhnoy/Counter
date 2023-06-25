@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from './routerCounter.module.css';
 import {CounterForRout} from './CounterForRout';
 import {SettingsForRouter} from './SettingsForRouter';
@@ -36,6 +36,32 @@ export const RouterCounter = () => {
             setError(null);
         }
     };
+
+    useEffect(() => {
+        debugger
+        let localNum = localStorage.getItem('RouteNum');
+        let localMaxNum = localStorage.getItem('RouteMaxNum');
+        let localMinNum = localStorage.getItem('RouteMinNum');
+        let localMaxNumForSettings = localStorage.getItem('RouteMaxNumForSettings');
+        let localMinNumForSettings = localStorage.getItem('RouteMinNumForSettings');
+        if (localNum && localMaxNum && localMinNum && localMinNumForSettings && localMaxNumForSettings) {
+            setNum(JSON.parse(localNum));
+            setMinNum(JSON.parse(localMinNum));
+            setMaxNum(JSON.parse(localMaxNum));
+            setMaxNumForSettings(JSON.parse(localMaxNumForSettings));
+            setMinNumForSettings(JSON.parse(localMinNumForSettings));
+        }
+    }, []);
+
+
+    useEffect(() => {
+        localStorage.setItem('RouteNum', JSON.stringify(num));
+        localStorage.setItem('RouteMaxNum', JSON.stringify(maxNum));
+        localStorage.setItem('RouteMinNum', JSON.stringify(minNum));
+        localStorage.setItem('RouteMaxNumForSettings', JSON.stringify(maxNumForSettings));
+        localStorage.setItem('RouteMinNumForSettings', JSON.stringify(minNumForSettings));
+    }, [num, maxNum, minNum]);
+
 
 
     return (
