@@ -26,6 +26,14 @@ display: flex;
     text-align: center;
     margin-left: 40px;
 
+}.errorInput{
+    width: 80px;
+    border: solid #d3334f 2px;
+    border-radius: 3px;
+    text-align: center;
+    margin-left: 40px;
+    background-color: #ee9bac;
+
 }
 
 .counter, .settings{
@@ -66,7 +74,17 @@ border: solid #84e2fe 2px;
     align-items: center;
 
 }
-
+.message{
+    font-size: 20px;
+    text-align: center;
+    margin-top:35px ;
+}
+.error{
+    color: #ee1442;
+    font-size: 20px;
+    text-align: center;
+    margin-top:35px ;
+}
 .deskMaxNum{
     color: #ee1442;
 }

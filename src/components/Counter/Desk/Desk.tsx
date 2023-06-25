@@ -1,6 +1,6 @@
 import React from 'react';
 type PropsType={
-    num:number
+    num:number|string
     className:string
 }
 
