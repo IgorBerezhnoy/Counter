@@ -1,73 +1,57 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {Button} from './Button/Button';
 import {Desk} from './Desk/Desk';
 import s from './counter.module.css';
 import {SuperInput} from './SuperInput/SuperInput';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootAppReducersType} from '../../StoreCount/StoreCount';
+
+
+import {
+    MessagesType,
+    NumbersType,
+    onClickIncAC,
+    onClickRestAC,
+    onClickSetAC
+} from '../../Reducers/CountReduser/CountReducer';
 
 export const Counter = () => {
 
-    let [num, setNum] = useState(0);
-    let [maxNum, setMaxNum] = useState(5);
-    let [minNum, setMinNum] = useState(0);
 
-    let [maxNumForSettings, setMaxNumForSettings] = useState(maxNum);
-    let [minNumForSettings, setMinNumForSettings] = useState(minNum);
 
-    let [message, setMessage] = useState<string | null>(null);
-    let [error, setError] = useState<string | null>(null);
+    const counter=useSelector<RootAppReducersType,NumbersType>(state => state.counter.numbers)
+    const messages=useSelector<RootAppReducersType,MessagesType>(state => state.counter.messages)
+
+    const dispatch=useDispatch()
+
+    let {
+        num,
+        maxNum,
+        minNum,
+        maxNumForSettings,
+        minNumForSettings}=counter
+    let {error,message}=messages
+
 
     const onClickInc = () => {
         if (num < maxNum) {
-            setNum(num + 1);
+         dispatch(onClickIncAC())
         }
     };
     const onClickRest = () => {
         if (num > minNum) {
-            setNum(minNum);
+            dispatch(onClickRestAC())
         }
 
     };
-    useEffect(() => {
-        debugger
-        let localNum = localStorage.getItem('Num');
-        let localMaxNum = localStorage.getItem('MaxNum');
-        let localMinNum = localStorage.getItem('MinNum');
-        let localMaxNumForSettings = localStorage.getItem('maxNumForSettings');
-        let localMinNumForSettings = localStorage.getItem('minNumForSettings');
-        if (localNum && localMaxNum && localMinNum && localMinNumForSettings && localMaxNumForSettings) {
-            setNum(JSON.parse(localNum));
-            setMinNum(JSON.parse(localMinNum));
-            setMaxNum(JSON.parse(localMaxNum));
-            setMaxNumForSettings(JSON.parse(localMaxNumForSettings));
-            setMinNumForSettings(JSON.parse(localMinNumForSettings));
-        }
-    }, []);
-
-
-    useEffect(() => {
-        localStorage.setItem('Num', JSON.stringify(num));
-        localStorage.setItem('MaxNum', JSON.stringify(maxNum));
-        localStorage.setItem('MinNum', JSON.stringify(minNum));
-        localStorage.setItem('maxNumForSettings', JSON.stringify(maxNumForSettings));
-        localStorage.setItem('minNumForSettings', JSON.stringify(minNumForSettings));
-    }, [num, maxNum, minNum]);
+    //
 
 
     const onClickSet = () => {
-        setMessage(null);
         if (maxNumForSettings > minNumForSettings && minNumForSettings > -1) {
-            setMaxNum(maxNumForSettings);
-            setMinNum(minNumForSettings);
-            setNum(minNumForSettings);
-            setError(null);
-
+            dispatch(onClickSetAC())
         }
     };
-    // const onChangeInput=()=>{
-    //     if (maxNumForSettings > minNumForSettings && minNumForSettings > -1){
-    //
-    //     }
-    // }
 
     return (
         <div className={s.wrapper}>
@@ -75,12 +59,11 @@ export const Counter = () => {
                 <div className={s.topTable}>
                     <SuperInput name={'max value:'} number={maxNumForSettings}
                                 conditionNumber={minNumForSettings}
-                                setNumber={setMaxNumForSettings}
-                                className={s.SuperInput} setMessage={setMessage} setError={setError} error={error}/>
+                                className={s.SuperInput} error={error}/>
                     <SuperInput name={'start value:'}
                                 conditionNumber={maxNumForSettings}
-                                number={minNumForSettings} setNumber={setMinNumForSettings}
-                                className={s.SuperInput} setMessage={setMessage} setError={setError} error={error}/>
+                                number={minNumForSettings}
+                                className={s.SuperInput} error={error}/>
                 </div>
                 <div className={s.buttons}>
                     <Button name={'set'} callBack={onClickSet} className={s.button} disabled={!!error}/>
@@ -100,3 +83,19 @@ export const Counter = () => {
         </div>);
 };
 
+    // let [num, setNum] = useState(0);
+    // let [maxNum, setMaxNum] = useState(5);
+    // let [minNum, setMinNum] = useState(0);
+    //
+    // let [maxNumForSettings, setMaxNumForSettings] = useState(maxNum);
+    // let [minNumForSettings, setMinNumForSettings] = useState(minNum);
+    //
+    // let [message, setMessage] = useState<string | null>(null);
+ // let [error, setError] = useState<string | null>(null);
+
+
+    // const onChangeInput=()=>{
+    //     if (maxNumForSettings > minNumForSettings && minNumForSettings > -1){
+    //
+    //     }
+    // }

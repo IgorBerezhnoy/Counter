@@ -1,13 +1,12 @@
 import React, {ChangeEvent, useState} from 'react';
 import s from '../counter.module.css';
+import {useDispatch} from 'react-redux';
+import {setErrorAC, setMessageAC} from '../../../Reducers/CountReduser/CountReducer';
 
 type PropsType = {
     name: string
     className: string
     number: number
-    setNumber: (num: number) => void
-    setMessage: (value: string | null) => void
-    setError: (value: string | null) => void
     conditionNumber: number
     error:string|null
 }
@@ -16,17 +15,19 @@ type PropsType = {
 export const SuperInput = (props: PropsType) => {
 
 
+    const dispatch=useDispatch()
+
     const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        props.setNumber(Number(e.currentTarget.value));
-        //;
+        // props.setNumber(Number(e.currentTarget.value));
         const condition = props.name === 'max value:';
 
         if (condition ? +e.currentTarget.value <= props.conditionNumber || Number(e.currentTarget.value) < 0
             : +e.currentTarget.value >= props.conditionNumber || Number(e.currentTarget.value) < 0) {
-            props.setError('Incorrect value!');
+            dispatch(setErrorAC('Incorrect value!'))
+
         } else {
-            props.setError(null);
-            props.setMessage('event values and press \'set\'');
+            dispatch(setErrorAC(null))
+            dispatch(setMessageAC('event values and press \'set\''))
 
         }
     };
