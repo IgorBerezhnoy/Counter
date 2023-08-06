@@ -1,7 +1,12 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useCallback, useState} from 'react';
 import s from '../counter.module.css';
 import {useDispatch} from 'react-redux';
-import {setErrorAC, setMessageAC} from '../../../Reducers/CountReduser/CountReducer';
+import {
+    onChangeInputHandlerMaxAC,
+    OnChangeInputHandlerMaxAT, onChangeInputHandlerMinAC,
+    setErrorAC,
+    setMessageAC
+} from '../../../Reducers/CountReduser/CountReducer';
 
 type PropsType = {
     name: string
@@ -12,14 +17,15 @@ type PropsType = {
 }
 
 
-export const SuperInput = (props: PropsType) => {
+export const SuperInput = React.memo( (props: PropsType) => {
 
 
     const dispatch=useDispatch()
 
-    const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const onChangeInputHandler =useCallback( (e: ChangeEvent<HTMLInputElement>) => {
         // props.setNumber(Number(e.currentTarget.value));
-        const condition = props.name === 'max value:';
+        (props.name === 'max value:')?dispatch(onChangeInputHandlerMaxAC(Number(e.currentTarget.value))):dispatch(onChangeInputHandlerMinAC(Number(e.currentTarget.value)))
+        const condition = props.name === 'max value:'
 
         if (condition ? +e.currentTarget.value <= props.conditionNumber || Number(e.currentTarget.value) < 0
             : +e.currentTarget.value >= props.conditionNumber || Number(e.currentTarget.value) < 0) {
@@ -30,7 +36,7 @@ export const SuperInput = (props: PropsType) => {
             dispatch(setMessageAC('event values and press \'set\''))
 
         }
-    };
+    },[props.conditionNumber,+props.name])
 
     return (
         <div>
@@ -40,5 +46,5 @@ export const SuperInput = (props: PropsType) => {
         </span>
         </div>
     );
-};
+})
 

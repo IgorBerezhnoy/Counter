@@ -20,9 +20,11 @@ type OnClickRestAT = { type: 'REST' }
 type onClickSetAT = { type: 'SET' }
 type setErrorAT = { type: 'ERROR', titleError: string | null }
 type setMessageAT = { type: 'MESSAGE', titleMessage: string | null }
+export type OnChangeInputHandlerMinAT = {type:"CHANGEINPUTMIN", value:number}
+export type OnChangeInputHandlerMaxAT = {type:"CHANGEINPUTMAX", value:number}
 
 
-type ActionType = OnClickIncAT | OnClickRestAT | onClickSetAT | setErrorAT | setMessageAT
+type ActionType = OnClickIncAT | OnClickRestAT | onClickSetAT | setErrorAT | setMessageAT|OnChangeInputHandlerMinAT|OnChangeInputHandlerMaxAT
 
 let initialState: StateType = {
     numbers: {
@@ -62,13 +64,17 @@ export const CountReducer = (state: StateType = initialState, action: ActionType
             return {...state,messages:{...state.messages,error:action.titleError}}
         case "MESSAGE":
             return {...state,messages:{...state.messages,message:action.titleMessage}}
+        case "CHANGEINPUTMAX":
+            return {...state,numbers:{...state.numbers,maxNumForSettings:action.value}}
+        case "CHANGEINPUTMIN":
+            return {...state,numbers:{...state.numbers,minNumForSettings:action.value}}
         default:
             return state
     }
     ;
 };
-export const onClickIncMinAC ({minValue}: {minValue?: number})=>({})
-export const onClickInMinAC ({ maxValue}: { maxValue: number})=>({})
+export const onChangeInputHandlerMaxAC =(value:number):OnChangeInputHandlerMaxAT=>({type:"CHANGEINPUTMAX", value})
+export const onChangeInputHandlerMinAC =(value:number):OnChangeInputHandlerMinAT=>({type:"CHANGEINPUTMIN", value})
 export const onClickIncAC = (): OnClickIncAT => ({type: 'INC'});
 export const onClickRestAC = (): OnClickRestAT => ({type: 'REST'});
 export const onClickSetAC = (): onClickSetAT => ({type: 'SET'});
