@@ -102,43 +102,43 @@ export const setErrorAC = (titleError: string | null): setErrorAT => ({type: 'ER
 export const setMessageAC = (titleMessage: string | null): setMessageAT => ({type: 'MESSAGE', titleMessage});
 
 
-export const onClickIncTC = (num: number): AppThunk => (dispatch) => {
-
-    dispatch(onClickIncAC());
-    localStorage.setItem('num', JSON.stringify(num + 1));
-};
-export const onClickRestTC = (minNum: number): AppThunk => (dispatch) => {
-    dispatch(onClickRestAC());
-    localStorage.setItem('num', JSON.stringify(minNum));
-};
-export const onClickSetTC = (): AppThunk => (dispatch, getState) => {
-    let {
-        maxNumForSettings,
-        minNumForSettings
-    } = getState().counter.numbers;
-
-    localStorage.setItem('num', JSON.stringify(minNumForSettings));
-    localStorage.setItem('maxNum', JSON.stringify(maxNumForSettings));
-    localStorage.setItem('minNum', JSON.stringify(minNumForSettings));
-    localStorage.setItem('maxNumForSettings', JSON.stringify(maxNumForSettings));
-    localStorage.setItem('minNumForSettings', JSON.stringify(minNumForSettings));
-
-    dispatch(onClickSetAC());
-};
-export const getNumsTC= (): AppThunk => (dispatch, getState) => {
-        let localNum = localStorage.getItem('num');
-        let localMaxNum = localStorage.getItem('maxNum');
-        let localMinNum = localStorage.getItem('minNum');
-        let localMaxNumForSettings = localStorage.getItem('maxNumForSettings');
-        let localMinNumForSettings = localStorage.getItem('minNumForSettings');
-        if (localNum && localMaxNum && localMinNum && localMinNumForSettings && localMaxNumForSettings) {
-            let numsObj= {
-                num: JSON.parse(localNum),
-                maxNum: JSON.parse(localMaxNum),
-                minNum: JSON.parse(localMinNum),
-                maxNumForSettings: JSON.parse(localMaxNumForSettings),
-                minNumForSettings: JSON.parse(localMinNumForSettings),
-            }
-            dispatch(getNumsAC(numsObj));
-        }
-};
+// export const onClickIncTC = (num: number): AppThunk => (dispatch) => {
+//
+//     dispatch(onClickIncAC());
+//     localStorage.setItem('num', JSON.stringify(num + 1));
+// };
+// export const onClickRestTC = (minNum: number): AppThunk => (dispatch) => {
+//     dispatch(onClickRestAC());
+//     localStorage.setItem('num', JSON.stringify(minNum));
+// };
+// export const onClickSetTC = (): AppThunk => (dispatch, getState) => {
+//     let {
+//         maxNumForSettings,
+//         minNumForSettings
+//     } = getState().counter.numbers;
+//
+//     localStorage.setItem('num', JSON.stringify(minNumForSettings));
+//     localStorage.setItem('maxNum', JSON.stringify(maxNumForSettings));
+//     localStorage.setItem('minNum', JSON.stringify(minNumForSettings));
+//     localStorage.setItem('maxNumForSettings', JSON.stringify(maxNumForSettings));
+//     localStorage.setItem('minNumForSettings', JSON.stringify(minNumForSettings));
+//
+//     dispatch(onClickSetAC());
+// };
+// export const getNumsTC= (): AppThunk => (dispatch, getState) => {
+//         let localNum = localStorage.getItem('num');
+//         let localMaxNum = localStorage.getItem('maxNum');
+//         let localMinNum = localStorage.getItem('minNum');
+//         let localMaxNumForSettings = localStorage.getItem('maxNumForSettings');
+//         let localMinNumForSettings = localStorage.getItem('minNumForSettings');
+//         if (localNum && localMaxNum && localMinNum && localMinNumForSettings && localMaxNumForSettings) {
+//             let numsObj= {
+//                 num: JSON.parse(localNum),
+//                 maxNum: JSON.parse(localMaxNum),
+//                 minNum: JSON.parse(localMinNum),
+//                 maxNumForSettings: JSON.parse(localMaxNumForSettings),
+//                 minNumForSettings: JSON.parse(localMinNumForSettings),
+//             }
+//             dispatch(getNumsAC(numsObj));
+//         }
+// };

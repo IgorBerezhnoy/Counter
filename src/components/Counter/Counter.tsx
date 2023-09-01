@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Button} from './Button/Button';
 import {Desk} from './Desk/Desk';
 import s from './counter.module.css';
@@ -8,20 +8,19 @@ import {RootAppReducersType, ThunkType} from '../../StoreCount/StoreCount';
 
 
 import {
-    getNumsTC,
     MessagesType,
     NumbersType,
-    onClickIncAC, onClickIncTC,
-    onClickRestAC, onClickRestTC,
-    onClickSetAC, onClickSetTC
+    onClickIncAC,
+    onClickRestAC,
+    onClickSetAC
 } from '../../Reducers/CountReduser/CountReducer';
 
 export const Counter = () => {
 
-useEffect(()=>{
-    debugger
-    dispatch(getNumsTC())
-},[])
+// useEffect(()=>{
+//     debugger
+//     dispatch(getNumsTC())
+// },[])
     const counter = useSelector<RootAppReducersType, NumbersType>(state => state.counter.numbers);
     const messages = useSelector<RootAppReducersType, MessagesType>(state => state.counter.messages);
 
@@ -39,20 +38,20 @@ useEffect(()=>{
 
     const onClickInc = () => {
         if (num < maxNum) {
-            dispatch(onClickIncTC(num));
+            dispatch(onClickIncAC());
 
         }
     };
     const onClickRest = () => {
         if (num > minNum) {
-            dispatch(onClickRestTC(minNum));
+            dispatch(onClickRestAC());
         }
 
     };
 
     const onClickSet = () => {
         if (maxNumForSettings > minNumForSettings && minNumForSettings > -1) {
-            dispatch(onClickSetTC());
+            dispatch(onClickSetAC());
         }
     };
 
